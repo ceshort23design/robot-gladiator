@@ -116,7 +116,7 @@ var startGame = function() {
             }
         }
         else {
-            window.alert("You have lost your robot in battle! Game over, man! Game Over!")
+            window.alert("You have lost your robot in battle! Game over, man! Game Over!");
         }
     }
     endGame();
@@ -128,6 +128,20 @@ var endGame = function() {
 
     if(playerInfo.health > 0) {  // If player survived
         window.alert("Great job, you survived the game!  You now have a score of " + playerInfo.money + ".");
+
+        var currentHighScore = localStorage.getItem("highScore");
+        if (currentHighScore == null || currentHighScore == "") {
+            currentHighScore = 0;
+        }
+        
+        if (currentHighScore >= playerInfo.money) {
+            window.alert("You did not get the high score.  Try Again!")
+        }
+        else {
+            localStorage.setItem("player", playerInfo.name);
+            localStorage.setItem("highScore", playerInfo.money);
+            window.alert("Congratulations! You beat the high score! New high score is " + playerInfo.money + ".");
+        }
     }
     else {   // if player died
         window.alert("You've lost your robot in battle!")
